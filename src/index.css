@@ -1,0 +1,360 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Theme tokens. Every color/radius/shadow/font in tailwind.config.ts
+ * resolves through these CSS custom properties, so switching
+ * `data-theme` on <html> re-skins the whole app with no component
+ * changes. See <ThemeToggle> for the runtime switch.
+ */
+:root {
+  /*
+   * Тема 3 — Brand (default): реальная палитра сервиса, взятая дословно
+   * из dashboard.css / login.css VetRemote — глубокий тёмно-синий +
+   * тыквенно-оранжевый акцент, Playfair Display (заголовки) + Source
+   * Sans 3 (текст), мягкие голубоватые свечения.
+   */
+  --color-indigo-50: 244 247 251;
+  --color-indigo-100: 232 238 245;
+  --color-indigo-200: 203 219 234;
+  --color-indigo-300: 157 184 214;
+  --color-indigo-400: 110 147 190;
+  --color-indigo-500: 76 122 176;
+  --color-indigo-600: 61 95 138;
+  --color-indigo-700: 44 74 110;
+  --color-indigo-800: 30 41 59;
+  --color-indigo-900: 20 27 41;
+
+  /* "pumpkin"-слот = фирменный тыквенный акцент (CTA, live-статусы) */
+  --color-pumpkin-50: 253 243 236;
+  --color-pumpkin-100: 251 228 210;
+  --color-pumpkin-200: 245 201 165;
+  --color-pumpkin-300: 239 169 120;
+  --color-pumpkin-400: 232 133 74;
+  --color-pumpkin-500: 214 117 58;
+  --color-pumpkin-600: 200 101 42;
+  --color-pumpkin-700: 168 83 31;
+  --color-pumpkin-800: 129 64 24;
+  --color-pumpkin-900: 92 46 18;
+
+  --color-ink-50: 246 248 251;
+  --color-ink-100: 238 242 247;
+  --color-ink-200: 220 228 237;
+  --color-ink-300: 194 207 221;
+  --color-ink-400: 147 162 181;
+  --color-ink-500: 90 109 127;
+  --color-ink-600: 67 82 100;
+  --color-ink-700: 46 59 74;
+  --color-ink-800: 31 41 55;
+  --color-ink-900: 26 43 61;
+  --color-ink-950: 15 24 38;
+
+  --color-surface: 255 255 255;
+  --color-surface-muted: 244 247 251;
+  --color-surface-sunken: 232 238 245;
+
+  /* "void" is a structural always-dark token (stats band, premium card,
+     modal scrim) — unlike the `ink` text scale, it never flips direction
+     between themes. */
+  --color-void: 15 24 38;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-sans: "Source Sans 3", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-xl: 1.125rem;
+  --radius-2xl: 1.375rem;
+  --radius-3xl: 1.75rem;
+
+  --shadow-soft: 0 8px 32px rgba(44, 74, 110, 0.12);
+  --shadow-card: 0 16px 48px rgba(44, 74, 110, 0.18), 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-lift: 0 24px 60px -12px rgba(44, 74, 110, 0.28), 0 10px 26px -6px rgba(200, 101, 42, 0.18);
+  --shadow-glow: 0 0 0 1px rgba(200, 101, 42, 0.18), 0 20px 50px -12px rgba(200, 101, 42, 0.4);
+
+  --bg-mesh-hero: radial-gradient(60% 50% at 18% 20%, rgba(61, 95, 138, 0.18) 0%, rgba(61, 95, 138, 0) 60%),
+    radial-gradient(50% 45% at 85% 10%, rgba(200, 101, 42, 0.16) 0%, rgba(200, 101, 42, 0) 60%),
+    radial-gradient(55% 50% at 90% 90%, rgba(44, 74, 110, 0.16) 0%, rgba(44, 74, 110, 0) 60%);
+  --bg-cta-gradient: linear-gradient(135deg, #c8652a 0%, #e8854a 100%);
+
+  --border-width-base: 1px;
+  --heading-transform: none;
+  --heading-tracking: -0.01em;
+}
+
+/*
+ * Тема 2 — Industrial Brutalism (Swiss Industrial Print archetype):
+ * matte paper + carbon ink + a single hazard-red/safety-yellow accent
+ * pair, zero radius, hard offset shadows, no gradients or blur.
+ * Grounded in the installed `industrial-brutalist-ui` skill.
+ */
+:root[data-theme="brutal"] {
+  --color-indigo-50: 255 234 234;
+  --color-indigo-100: 255 201 201;
+  --color-indigo-200: 255 155 155;
+  --color-indigo-300: 255 107 107;
+  --color-indigo-400: 255 61 61;
+  --color-indigo-500: 255 42 42;
+  --color-indigo-600: 230 25 25;
+  --color-indigo-700: 184 18 18;
+  --color-indigo-800: 138 13 13;
+  --color-indigo-900: 92 8 8;
+
+  --color-pumpkin-50: 255 252 232;
+  --color-pumpkin-100: 255 246 184;
+  --color-pumpkin-200: 255 238 133;
+  --color-pumpkin-300: 255 229 82;
+  --color-pumpkin-400: 255 220 38;
+  --color-pumpkin-500: 255 212 0;
+  --color-pumpkin-600: 224 184 0;
+  --color-pumpkin-700: 179 146 0;
+  --color-pumpkin-800: 128 105 0;
+  --color-pumpkin-900: 77 63 0;
+
+  /* ink-50..300 are intentionally near-black: in this design they're
+     used exclusively for borders/dividers/tinted fills, never body
+     text, so pushing them to black is what produces the thick "hard
+     border" brutalist look without touching every component. */
+  --color-ink-50: 14 14 14;
+  --color-ink-100: 14 14 14;
+  --color-ink-200: 14 14 14;
+  --color-ink-300: 26 26 26;
+  --color-ink-400: 87 83 74;
+  --color-ink-500: 66 62 54;
+  --color-ink-600: 46 43 37;
+  --color-ink-700: 32 30 25;
+  --color-ink-800: 20 19 15;
+  --color-ink-900: 10 10 10;
+  --color-ink-950: 0 0 0;
+
+  --color-surface: 255 255 255;
+  --color-surface-muted: 244 244 240;
+  --color-surface-sunken: 232 230 222;
+
+  --color-void: 0 0 0;
+
+  --font-display: "Archivo Black", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+
+  --shadow-soft: 3px 3px 0 0 rgb(var(--color-ink-900));
+  --shadow-card: 6px 6px 0 0 rgb(var(--color-ink-900));
+  --shadow-lift: 10px 10px 0 0 rgb(var(--color-ink-900));
+  --shadow-glow: 6px 6px 0 0 rgb(var(--color-indigo-600));
+
+  --bg-mesh-hero: none;
+  --bg-cta-gradient: linear-gradient(180deg, rgb(230 25 25), rgb(230 25 25));
+
+  --border-width-base: 2px;
+  --heading-transform: uppercase;
+  --heading-tracking: -0.02em;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface-muted font-sans text-ink-800 antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink-900;
+    text-transform: var(--heading-transform);
+    letter-spacing: var(--heading-tracking);
+  }
+
+  section[id] {
+    scroll-margin-top: 88px;
+  }
+
+  ::selection {
+    @apply bg-indigo-200 text-indigo-900;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-indigo-500 ring-offset-2 ring-offset-surface;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Brutal theme: no soft blur, no translucency, hard black borders everywhere. */
+[data-theme="brutal"] .border,
+[data-theme="brutal"] .border-t,
+[data-theme="brutal"] .border-b,
+[data-theme="brutal"] .border-l,
+[data-theme="brutal"] .border-r,
+[data-theme="brutal"] .border-2,
+[data-theme="brutal"] .border-dashed {
+  border-width: var(--border-width-base);
+}
+
+[data-theme="brutal"] .hero-blob,
+[data-theme="brutal"] .brand-ring {
+  display: none !important;
+}
+
+[data-theme="brutal"] .backdrop-blur,
+[data-theme="brutal"] .backdrop-blur-md,
+[data-theme="brutal"] .backdrop-blur-sm {
+  backdrop-filter: none !important;
+  background-color: rgb(var(--color-surface)) !important;
+}
+
+/*
+ * Product-screenshot mockups (BrowserFrame/PhoneFrame content) always
+ * depict the real app's own light UI, regardless of the marketing theme —
+ * kept pinned to Theme 3's light `ink` values so a future dark theme can't
+ * quietly invert the screenshots again.
+ */
+.mockup-surface {
+  --color-ink-50: 246 247 251;
+  --color-ink-100: 238 240 247;
+  --color-ink-200: 221 225 236;
+  --color-ink-300: 195 201 218;
+  --color-ink-400: 142 151 176;
+  --color-ink-500: 99 109 138;
+  --color-ink-600: 74 81 112;
+  --color-ink-700: 54 60 86;
+  --color-ink-800: 34 38 59;
+  --color-ink-900: 23 26 44;
+  --color-ink-950: 11 12 21;
+}
+
+/* ────────────────────────────────────────────────────────────────────
+ * Per-theme decorative flourishes
+ * ──────────────────────────────────────────────────────────────────── */
+
+/* Brutal: technical corner crosshairs on card-level surfaces, in the
+   spirit of the brutalist-skill's "Industrial Markers" (crosshairs at
+   grid intersections). Hidden entirely outside the brutal theme. */
+.corner-marks > span {
+  display: none;
+}
+
+[data-theme="brutal"] .corner-marks > span {
+  display: block;
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  color: rgb(var(--color-ink-900));
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+[data-theme="brutal"] .corner-marks > span::before,
+[data-theme="brutal"] .corner-marks > span::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+
+[data-theme="brutal"] .corner-marks > span::before {
+  left: 5px;
+  top: 0;
+  width: 1px;
+  height: 11px;
+}
+
+[data-theme="brutal"] .corner-marks > span::after {
+  top: 5px;
+  left: 0;
+  width: 11px;
+  height: 1px;
+}
+
+[data-theme="brutal"] .corner-marks > span:nth-child(1) {
+  top: -5px;
+  left: -5px;
+}
+[data-theme="brutal"] .corner-marks > span:nth-child(2) {
+  top: -5px;
+  right: -5px;
+}
+[data-theme="brutal"] .corner-marks > span:nth-child(3) {
+  bottom: -5px;
+  left: -5px;
+}
+[data-theme="brutal"] .corner-marks > span:nth-child(4) {
+  bottom: -5px;
+  right: -5px;
+}
+
+/* Brutal: wrap feature-row index numbers in ASCII brackets, e.g. "01" -> "[ 01 ]". */
+[data-theme="brutal"] .feature-index {
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+
+[data-theme="brutal"] .feature-index::before {
+  content: "[ ";
+}
+
+[data-theme="brutal"] .feature-index::after {
+  content: " ]";
+}
+
+/* Brand: floating decorative rings echoing the real product's login page
+   (`.login-page::before/::after`) — thin animated circles, hidden outside
+   the brand theme. */
+.brand-ring {
+  display: none;
+}
+
+:root:not([data-theme="brutal"]) .brand-ring {
+  display: block;
+}
+
+@keyframes brand-ring-float {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(16px, -12px) rotate(3deg);
+  }
+}
+
+/* Live-pulse indicator (reproduces the product's own `.live-dot`/`livePulse`
+   keyframe from dashboard.css) — used wherever something should read as
+   "happening right now" rather than static marketing copy. */
+@keyframes live-pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgb(var(--color-pumpkin-500) / 0.55);
+  }
+  60% {
+    box-shadow: 0 0 0 8px rgb(var(--color-pumpkin-500) / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(var(--color-pumpkin-500) / 0);
+  }
+}
+
+.live-pulse-dot {
+  animation: live-pulse-ring 2s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

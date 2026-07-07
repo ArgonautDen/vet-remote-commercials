@@ -1,0 +1,128 @@
+import { useState } from "react";
+import { CalendarCheck, PlayCircle, ShieldCheck, Smartphone, CreditCard } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
+import { HashLink } from "@/components/ui/HashLink";
+import { LivePulse } from "@/components/ui/LivePulse";
+import { CornerMarks } from "@/components/ui/CornerMarks";
+import { BrowserFrame } from "@/components/mockups/BrowserFrame";
+import { PhoneFrame } from "@/components/mockups/PhoneFrame";
+import { DashboardMockup } from "@/components/mockups/DashboardMockup";
+import { CalendarDayMockup } from "@/components/mockups/CalendarDayMockup";
+import { VideoModal } from "@/components/VideoModal";
+
+const trustPoints = [
+  { icon: ShieldCheck, label: "Без установки" },
+  { icon: CreditCard, label: "Без карты" },
+  { icon: Smartphone, label: "Поддержка на русском" },
+];
+
+export function Hero() {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+
+  return (
+    <section
+      id="hero"
+      className="relative isolate overflow-hidden bg-mesh-hero pb-20 pt-14 sm:pb-24 sm:pt-20 lg:min-h-[92vh] lg:pb-28 lg:pt-24"
+    >
+      <div
+        aria-hidden="true"
+        className="hero-blob absolute -left-24 top-24 -z-10 size-72 rounded-full bg-indigo-300/25 blur-3xl animate-float"
+      />
+      <div
+        aria-hidden="true"
+        className="hero-blob absolute -right-16 top-56 -z-10 size-80 rounded-full bg-pumpkin-300/20 blur-3xl animate-float"
+        style={{ animationDelay: "1.5s" }}
+      />
+
+      {/* Тема Brand only: floating ring outlines, echoing login.css's own
+          decorative circles (border + slow float). No-op elsewhere. */}
+      <div
+        aria-hidden="true"
+        className="brand-ring absolute -right-16 -top-20 -z-10 size-[340px] rounded-full border-2 border-pumpkin-500/25"
+        style={{ animation: "brand-ring-float 20s ease-in-out infinite" }}
+      />
+      <div
+        aria-hidden="true"
+        className="brand-ring absolute -bottom-16 -left-10 -z-10 size-[220px] rounded-full border-2 border-pumpkin-500/20"
+        style={{ animation: "brand-ring-float 15s ease-in-out infinite reverse" }}
+      />
+
+      <Container className="grid items-center gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-10">
+        <Reveal direction="left" className="flex flex-col items-start gap-6">
+          <span className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white/80 px-4 py-1.5 text-sm font-semibold text-indigo-700 shadow-soft backdrop-blur">
+            Первая в России CRM для ветврачей нового поколения
+          </span>
+
+          <h1 className="text-balance text-4xl font-extrabold leading-[1.08] text-ink-900 sm:text-5xl lg:text-[3.4rem]">
+            Ведите пациентов так,
+            <br className="hidden sm:block" /> как вы всегда хотели
+          </h1>
+
+          <p className="max-w-xl text-balance text-lg leading-relaxed text-ink-500 sm:text-xl">
+            VetRemote — первая в России ветеринарная CRM с современным интерфейсом. Картотека,
+            календарь, онлайн-запись и анкеты — всё в одном месте. Работает на компьютере и
+            телефоне.
+          </p>
+
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <HashLink hash="#pricing">
+              <Button variant="primary" size="lg" icon={<CalendarCheck className="size-5" />}>
+                Попробовать бесплатно 14 дней
+              </Button>
+            </HashLink>
+            <Button
+              variant="ghost"
+              size="lg"
+              icon={<PlayCircle className="size-5" />}
+              iconPosition="left"
+              onClick={() => setIsVideoOpen(true)}
+            >
+              Смотреть демо
+            </Button>
+          </div>
+
+          <div className="flex flex-col gap-3 pt-2">
+            <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              {trustPoints.map(({ icon: Icon, label }) => (
+                <li key={label} className="flex items-center gap-2 text-sm font-medium text-ink-500">
+                  <Icon className="size-4 text-indigo-500" aria-hidden="true" />
+                  {label}
+                </li>
+              ))}
+            </ul>
+            <LivePulse>Сейчас на линии 24 врача</LivePulse>
+          </div>
+        </Reveal>
+
+        <Reveal direction="right" delay={150} className="relative">
+          <div className="relative mx-auto max-w-xl lg:max-w-none">
+            <CornerMarks />
+            <button
+              type="button"
+              onClick={() => setIsVideoOpen(true)}
+              className="group relative block w-full cursor-pointer text-left"
+              aria-label="Смотреть демо VetRemote"
+            >
+              <BrowserFrame className="transition-transform duration-500 group-hover:-translate-y-1">
+                <DashboardMockup />
+              </BrowserFrame>
+              <span className="absolute inset-0 flex items-center justify-center bg-void/0 transition-colors duration-300 group-hover:bg-void/10">
+                <span className="flex size-16 scale-90 items-center justify-center rounded-full bg-white/95 text-indigo-600 opacity-0 shadow-lift transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+                  <PlayCircle className="size-8" aria-hidden="true" />
+                </span>
+              </span>
+            </button>
+
+            <PhoneFrame className="absolute -bottom-10 -right-6 hidden shadow-lift sm:block lg:-right-10 lg:-bottom-14">
+              <CalendarDayMockup />
+            </PhoneFrame>
+          </div>
+        </Reveal>
+      </Container>
+
+      <VideoModal isOpen={isVideoOpen} onClose={() => setIsVideoOpen(false)} />
+    </section>
+  );
+}
