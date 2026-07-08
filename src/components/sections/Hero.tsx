@@ -4,8 +4,6 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { HashLink } from "@/components/ui/HashLink";
-import { LivePulse } from "@/components/ui/LivePulse";
-import { CornerMarks } from "@/components/ui/CornerMarks";
 import { BrowserFrame } from "@/components/mockups/BrowserFrame";
 import { PhoneFrame } from "@/components/mockups/PhoneFrame";
 import { DashboardMockup } from "@/components/mockups/DashboardMockup";
@@ -24,7 +22,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative isolate overflow-hidden bg-mesh-hero pb-20 pt-14 sm:pb-24 sm:pt-20 lg:min-h-[92vh] lg:pb-28 lg:pt-24"
+      className="relative isolate overflow-hidden border-b-2 border-pumpkin-500/30 bg-mesh-hero pb-20 pt-14 sm:pb-24 sm:pt-20 lg:min-h-[92vh] lg:pb-28 lg:pt-24"
     >
       <div
         aria-hidden="true"
@@ -36,8 +34,8 @@ export function Hero() {
         style={{ animationDelay: "1.5s" }}
       />
 
-      {/* Тема Brand only: floating ring outlines, echoing login.css's own
-          decorative circles (border + slow float). No-op elsewhere. */}
+      {/* Floating ring outlines, echoing login.css's own decorative
+          circles (border + slow float). */}
       <div
         aria-hidden="true"
         className="brand-ring absolute -right-16 -top-20 -z-10 size-[340px] rounded-full border-2 border-pumpkin-500/25"
@@ -68,8 +66,13 @@ export function Hero() {
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <HashLink hash="#pricing">
-              <Button variant="primary" size="lg" icon={<CalendarCheck className="size-5" />}>
-                Попробовать бесплатно 14 дней
+              <Button
+                variant="primary"
+                size="lg"
+                shimmer
+                icon={<CalendarCheck className="size-5" />}
+              >
+                Попробовать бесплатно
               </Button>
             </HashLink>
             <Button
@@ -83,22 +86,18 @@ export function Hero() {
             </Button>
           </div>
 
-          <div className="flex flex-col gap-3 pt-2">
-            <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
-              {trustPoints.map(({ icon: Icon, label }) => (
-                <li key={label} className="flex items-center gap-2 text-sm font-medium text-ink-500">
-                  <Icon className="size-4 text-indigo-500" aria-hidden="true" />
-                  {label}
-                </li>
-              ))}
-            </ul>
-            <LivePulse>Сейчас на линии 24 врача</LivePulse>
-          </div>
+          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2">
+            {trustPoints.map(({ icon: Icon, label }) => (
+              <li key={label} className="flex items-center gap-2 text-sm font-medium text-ink-500">
+                <Icon className="size-4 text-indigo-500" aria-hidden="true" />
+                {label}
+              </li>
+            ))}
+          </ul>
         </Reveal>
 
         <Reveal direction="right" delay={150} className="relative">
           <div className="relative mx-auto max-w-xl lg:max-w-none">
-            <CornerMarks />
             <button
               type="button"
               onClick={() => setIsVideoOpen(true)}
@@ -115,9 +114,15 @@ export function Hero() {
               </span>
             </button>
 
-            <PhoneFrame className="absolute -bottom-10 -right-6 hidden shadow-lift sm:block lg:-right-10 lg:-bottom-14">
-              <CalendarDayMockup />
-            </PhoneFrame>
+            <Reveal
+              direction="up"
+              delay={450}
+              className="absolute -right-6 bottom-[50px] hidden sm:block lg:-right-10 lg:bottom-[34px]"
+            >
+              <PhoneFrame className="shadow-lift">
+                <CalendarDayMockup />
+              </PhoneFrame>
+            </Reveal>
           </div>
         </Reveal>
       </Container>

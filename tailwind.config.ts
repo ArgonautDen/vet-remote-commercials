@@ -2,8 +2,8 @@ import type { Config } from "tailwindcss";
 
 /**
  * All brand colors resolve through CSS custom properties (see src/index.css)
- * so the whole palette can be swapped at runtime via `[data-theme]` on
- * <html> — no component classes need to change between themes.
+ * rather than literal hex values, keeping the palette centralized in one
+ * place even though there's a single (Brand) theme.
  */
 function themedColor(name: string) {
   return `rgb(var(--color-${name}) / <alpha-value>)`;
@@ -41,7 +41,6 @@ export default {
       fontFamily: {
         display: ["var(--font-display)", "system-ui", "sans-serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       borderRadius: {
         xl: "var(--radius-xl)",

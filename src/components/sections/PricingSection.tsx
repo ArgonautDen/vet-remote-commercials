@@ -3,13 +3,17 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { CornerMarks } from "@/components/ui/CornerMarks";
 import { pricingPlans } from "@/data/pricing";
 import { cn } from "@/lib/cn";
 
 export function PricingSection() {
   return (
-    <section id="pricing" className="py-20 sm:py-24">
+    <section id="pricing" className="relative overflow-hidden py-20 sm:py-24">
+      <div
+        aria-hidden="true"
+        className="hero-blob absolute -left-24 bottom-0 -z-10 size-96 rounded-full bg-pumpkin-300/20 blur-3xl animate-float"
+        style={{ animationDelay: "0.8s" }}
+      />
       <Container>
         <Reveal>
           <SectionHeading
@@ -25,13 +29,12 @@ export function PricingSection() {
             <Reveal key={plan.name} direction={index === 0 ? "left" : "right"} delay={index * 120}>
               <div
                 className={cn(
-                  "relative flex h-full flex-col gap-6 rounded-3xl border p-7 sm:p-8",
+                  "flex h-full flex-col gap-6 rounded-3xl border p-7 transition-shadow duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] sm:p-8",
                   plan.highlighted
                     ? "border-indigo-600 bg-void text-white shadow-lift"
-                    : "border-ink-200 bg-surface shadow-soft",
+                    : "glass-shine-card shadow-soft hover:shadow-lift",
                 )}
               >
-                <CornerMarks />
                 <div>
                   <p
                     className={cn(
@@ -73,6 +76,7 @@ export function PricingSection() {
                   to="/contacts"
                   variant={plan.highlighted ? "outline" : "primary"}
                   size="lg"
+                  shimmer={!plan.highlighted}
                   className="w-full"
                 >
                   {plan.cta}

@@ -3,18 +3,12 @@
 @tailwind utilities;
 
 /*
- * Theme tokens. Every color/radius/shadow/font in tailwind.config.ts
- * resolves through these CSS custom properties, so switching
- * `data-theme` on <html> re-skins the whole app with no component
- * changes. See <ThemeToggle> for the runtime switch.
+ * Brand palette: VetRemote's real product colors, taken verbatim from
+ * dashboard.css / login.css — deep navy + pumpkin-orange accent, soft
+ * blue-tinted glows. Every color/radius/shadow in tailwind.config.ts
+ * resolves through these CSS custom properties.
  */
 :root {
-  /*
-   * Тема 3 — Brand (default): реальная палитра сервиса, взятая дословно
-   * из dashboard.css / login.css VetRemote — глубокий тёмно-синий +
-   * тыквенно-оранжевый акцент, Playfair Display (заголовки) + Source
-   * Sans 3 (текст), мягкие голубоватые свечения.
-   */
   --color-indigo-50: 244 247 251;
   --color-indigo-100: 232 238 245;
   --color-indigo-200: 203 219 234;
@@ -55,13 +49,11 @@
   --color-surface-sunken: 232 238 245;
 
   /* "void" is a structural always-dark token (stats band, premium card,
-     modal scrim) — unlike the `ink` text scale, it never flips direction
-     between themes. */
+     modal scrim) — distinct from the `ink` text scale. */
   --color-void: 15 24 38;
 
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-sans: "Source Sans 3", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: "Archivo Black", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
 
   --radius-xl: 1.125rem;
   --radius-2xl: 1.375rem;
@@ -76,87 +68,15 @@
     radial-gradient(50% 45% at 85% 10%, rgba(200, 101, 42, 0.16) 0%, rgba(200, 101, 42, 0) 60%),
     radial-gradient(55% 50% at 90% 90%, rgba(44, 74, 110, 0.16) 0%, rgba(44, 74, 110, 0) 60%);
   --bg-cta-gradient: linear-gradient(135deg, #c8652a 0%, #e8854a 100%);
-
-  --border-width-base: 1px;
-  --heading-transform: none;
-  --heading-tracking: -0.01em;
-}
-
-/*
- * Тема 2 — Industrial Brutalism (Swiss Industrial Print archetype):
- * matte paper + carbon ink + a single hazard-red/safety-yellow accent
- * pair, zero radius, hard offset shadows, no gradients or blur.
- * Grounded in the installed `industrial-brutalist-ui` skill.
- */
-:root[data-theme="brutal"] {
-  --color-indigo-50: 255 234 234;
-  --color-indigo-100: 255 201 201;
-  --color-indigo-200: 255 155 155;
-  --color-indigo-300: 255 107 107;
-  --color-indigo-400: 255 61 61;
-  --color-indigo-500: 255 42 42;
-  --color-indigo-600: 230 25 25;
-  --color-indigo-700: 184 18 18;
-  --color-indigo-800: 138 13 13;
-  --color-indigo-900: 92 8 8;
-
-  --color-pumpkin-50: 255 252 232;
-  --color-pumpkin-100: 255 246 184;
-  --color-pumpkin-200: 255 238 133;
-  --color-pumpkin-300: 255 229 82;
-  --color-pumpkin-400: 255 220 38;
-  --color-pumpkin-500: 255 212 0;
-  --color-pumpkin-600: 224 184 0;
-  --color-pumpkin-700: 179 146 0;
-  --color-pumpkin-800: 128 105 0;
-  --color-pumpkin-900: 77 63 0;
-
-  /* ink-50..300 are intentionally near-black: in this design they're
-     used exclusively for borders/dividers/tinted fills, never body
-     text, so pushing them to black is what produces the thick "hard
-     border" brutalist look without touching every component. */
-  --color-ink-50: 14 14 14;
-  --color-ink-100: 14 14 14;
-  --color-ink-200: 14 14 14;
-  --color-ink-300: 26 26 26;
-  --color-ink-400: 87 83 74;
-  --color-ink-500: 66 62 54;
-  --color-ink-600: 46 43 37;
-  --color-ink-700: 32 30 25;
-  --color-ink-800: 20 19 15;
-  --color-ink-900: 10 10 10;
-  --color-ink-950: 0 0 0;
-
-  --color-surface: 255 255 255;
-  --color-surface-muted: 244 244 240;
-  --color-surface-sunken: 232 230 222;
-
-  --color-void: 0 0 0;
-
-  --font-display: "Archivo Black", system-ui, sans-serif;
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-
-  --radius-xl: 0px;
-  --radius-2xl: 0px;
-  --radius-3xl: 0px;
-
-  --shadow-soft: 3px 3px 0 0 rgb(var(--color-ink-900));
-  --shadow-card: 6px 6px 0 0 rgb(var(--color-ink-900));
-  --shadow-lift: 10px 10px 0 0 rgb(var(--color-ink-900));
-  --shadow-glow: 6px 6px 0 0 rgb(var(--color-indigo-600));
-
-  --bg-mesh-hero: none;
-  --bg-cta-gradient: linear-gradient(180deg, rgb(230 25 25), rgb(230 25 25));
-
-  --border-width-base: 2px;
-  --heading-transform: uppercase;
-  --heading-tracking: -0.02em;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Kept off the Layout wrapper on purpose: overflow-x on an ancestor
+       div implicitly makes its overflow-y "auto" too, which turns it into
+       its own scroll container and breaks the sticky <Header> inside it. */
+    overflow-x: hidden;
   }
 
   body {
@@ -169,8 +89,18 @@
   h3,
   h4 {
     @apply font-display text-ink-900;
-    text-transform: var(--heading-transform);
-    letter-spacing: var(--heading-tracking);
+    letter-spacing: -0.01em;
+  }
+
+  h1::first-letter,
+  h2::first-letter {
+    color: rgb(var(--color-pumpkin-600));
+  }
+
+  /* Opt out where the heading already sits on a pumpkin-toned background
+     (e.g. the final CTA's gradient band) — the accent would just blend in. */
+  .no-drop-cap::first-letter {
+    color: inherit;
   }
 
   section[id] {
@@ -192,133 +122,8 @@
   }
 }
 
-/* Brutal theme: no soft blur, no translucency, hard black borders everywhere. */
-[data-theme="brutal"] .border,
-[data-theme="brutal"] .border-t,
-[data-theme="brutal"] .border-b,
-[data-theme="brutal"] .border-l,
-[data-theme="brutal"] .border-r,
-[data-theme="brutal"] .border-2,
-[data-theme="brutal"] .border-dashed {
-  border-width: var(--border-width-base);
-}
-
-[data-theme="brutal"] .hero-blob,
-[data-theme="brutal"] .brand-ring {
-  display: none !important;
-}
-
-[data-theme="brutal"] .backdrop-blur,
-[data-theme="brutal"] .backdrop-blur-md,
-[data-theme="brutal"] .backdrop-blur-sm {
-  backdrop-filter: none !important;
-  background-color: rgb(var(--color-surface)) !important;
-}
-
-/*
- * Product-screenshot mockups (BrowserFrame/PhoneFrame content) always
- * depict the real app's own light UI, regardless of the marketing theme —
- * kept pinned to Theme 3's light `ink` values so a future dark theme can't
- * quietly invert the screenshots again.
- */
-.mockup-surface {
-  --color-ink-50: 246 247 251;
-  --color-ink-100: 238 240 247;
-  --color-ink-200: 221 225 236;
-  --color-ink-300: 195 201 218;
-  --color-ink-400: 142 151 176;
-  --color-ink-500: 99 109 138;
-  --color-ink-600: 74 81 112;
-  --color-ink-700: 54 60 86;
-  --color-ink-800: 34 38 59;
-  --color-ink-900: 23 26 44;
-  --color-ink-950: 11 12 21;
-}
-
-/* ────────────────────────────────────────────────────────────────────
- * Per-theme decorative flourishes
- * ──────────────────────────────────────────────────────────────────── */
-
-/* Brutal: technical corner crosshairs on card-level surfaces, in the
-   spirit of the brutalist-skill's "Industrial Markers" (crosshairs at
-   grid intersections). Hidden entirely outside the brutal theme. */
-.corner-marks > span {
-  display: none;
-}
-
-[data-theme="brutal"] .corner-marks > span {
-  display: block;
-  position: absolute;
-  width: 11px;
-  height: 11px;
-  color: rgb(var(--color-ink-900));
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-[data-theme="brutal"] .corner-marks > span::before,
-[data-theme="brutal"] .corner-marks > span::after {
-  content: "";
-  position: absolute;
-  background: currentColor;
-}
-
-[data-theme="brutal"] .corner-marks > span::before {
-  left: 5px;
-  top: 0;
-  width: 1px;
-  height: 11px;
-}
-
-[data-theme="brutal"] .corner-marks > span::after {
-  top: 5px;
-  left: 0;
-  width: 11px;
-  height: 1px;
-}
-
-[data-theme="brutal"] .corner-marks > span:nth-child(1) {
-  top: -5px;
-  left: -5px;
-}
-[data-theme="brutal"] .corner-marks > span:nth-child(2) {
-  top: -5px;
-  right: -5px;
-}
-[data-theme="brutal"] .corner-marks > span:nth-child(3) {
-  bottom: -5px;
-  left: -5px;
-}
-[data-theme="brutal"] .corner-marks > span:nth-child(4) {
-  bottom: -5px;
-  right: -5px;
-}
-
-/* Brutal: wrap feature-row index numbers in ASCII brackets, e.g. "01" -> "[ 01 ]". */
-[data-theme="brutal"] .feature-index {
-  font-family: var(--font-mono);
-  letter-spacing: 0.05em;
-}
-
-[data-theme="brutal"] .feature-index::before {
-  content: "[ ";
-}
-
-[data-theme="brutal"] .feature-index::after {
-  content: " ]";
-}
-
-/* Brand: floating decorative rings echoing the real product's login page
-   (`.login-page::before/::after`) — thin animated circles, hidden outside
-   the brand theme. */
-.brand-ring {
-  display: none;
-}
-
-:root:not([data-theme="brutal"]) .brand-ring {
-  display: block;
-}
-
+/* Floating decorative rings in the hero, echoing the real product's login
+   page (`.login-page::before/::after`) — thin animated circles. */
 @keyframes brand-ring-float {
   0%,
   100% {
@@ -329,23 +134,94 @@
   }
 }
 
-/* Live-pulse indicator (reproduces the product's own `.live-dot`/`livePulse`
-   keyframe from dashboard.css) — used wherever something should read as
-   "happening right now" rather than static marketing copy. */
-@keyframes live-pulse-ring {
+/* Very slow, barely-there light drift across primary CTAs (see Button's
+   `shimmer` prop). Pure `background-position` animation on a wide,
+   gently-feathered gradient (no transform/skew, no hard geometric edge for
+   `overflow-hidden` to clip into a seam). `--shimmer-delay` is set inline
+   per button instance (see Button.tsx) with a random negative offset, so
+   multiple shimmering buttons on one page never pulse in sync. */
+@keyframes shimmer-sweep {
   0% {
-    box-shadow: 0 0 0 0 rgb(var(--color-pumpkin-500) / 0.55);
+    background-position: -140% 0;
   }
-  60% {
-    box-shadow: 0 0 0 8px rgb(var(--color-pumpkin-500) / 0);
-  }
+  55%,
   100% {
-    box-shadow: 0 0 0 0 rgb(var(--color-pumpkin-500) / 0);
+    background-position: 240% 0;
   }
 }
 
-.live-pulse-dot {
-  animation: live-pulse-ring 2s ease-out infinite;
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    100deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.22) 49%,
+    rgba(255, 255, 255, 0.22) 51%,
+    transparent 60%
+  );
+  background-size: 260% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer-sweep 9s ease-in-out infinite;
+  animation-delay: var(--shimmer-delay, 0s);
+  pointer-events: none;
+}
+
+/* Floating FAQ flip-cards: 3D flip on click, front = question, back =
+   answer. Desktop/tablet only — mobile keeps the plain accordion list. */
+.flip-card-scene {
+  perspective: 1600px;
+}
+
+.flip-card-plate {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.flip-card-plate.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-face-back {
+  transform: rotateY(180deg);
+}
+
+/* Frosted "soft-touch" glass treatment for explanation cards (problems,
+   pricing, feature text): heavy blur + a matte, evenly-misted translucent
+   fill (like a light spray coating, not clear glossy glass), soft all-round
+   edge instead of a hard border color. Hover state is just a slow, soft
+   shadow lift (see each call site's `transition-shadow duration-700`). */
+.glass-shine-card {
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.6);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.45) 100%);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-color: transparent;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.glass-shine-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  /* Faint dusting texture — tiny soft dots, like a sprayed matte coating. */
+  background-image: radial-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+  background-size: 5px 5px;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -13,7 +13,12 @@ import { TemplatesMockup } from "@/components/mockups/TemplatesMockup";
 
 export function FeaturesSection() {
   return (
-    <section id="features" className="bg-surface py-20 sm:py-24">
+    <section id="features" className="relative overflow-hidden bg-surface py-20 sm:py-24">
+      <div
+        aria-hidden="true"
+        className="hero-blob absolute -right-32 top-1/3 -z-10 size-[28rem] rounded-full bg-pumpkin-300/15 blur-3xl animate-float"
+        style={{ animationDelay: "2.2s" }}
+      />
       <Container>
         <Reveal>
           <SectionHeading
@@ -44,14 +49,21 @@ export function FeaturesSection() {
           title="Календарь, который работает на вас"
           description="Записи на день и неделю, цветовая кодировка типов приёма, мгновенное добавление события. На телефоне — вертикальный вид по дням, удобно смотреть между приёмами."
           reverse
+          className="!pt-[150px]"
           visual={
-            <div className="relative">
+            <div className="relative lg:min-h-[410px]">
               <BrowserFrame>
                 <CalendarMockup />
               </BrowserFrame>
-              <PhoneFrame className="absolute -bottom-8 -right-4 hidden w-[180px] shadow-lift sm:block">
-                <CalendarDayMockup />
-              </PhoneFrame>
+              <Reveal
+                direction="up"
+                delay={300}
+                className="absolute -bottom-[2px] left-6 z-10 hidden lg:block"
+              >
+                <PhoneFrame className="w-[180px] shadow-lift">
+                  <CalendarDayMockup />
+                </PhoneFrame>
+              </Reveal>
             </div>
           }
         />

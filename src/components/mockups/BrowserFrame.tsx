@@ -29,10 +29,7 @@ export function BrowserFrame({ children, url = "app.vetremote.ru", className }: 
           </div>
         </div>
       </div>
-      {/* mockup-surface re-pins the `ink` scale to light values: this
-          represents the real product's own (light) UI, which stays legible
-          regardless of the active landing theme. */}
-      <div className="mockup-surface bg-[#F5F6FB]">{children}</div>
+      <div className="bg-[#F5F6FB]">{children}</div>
     </div>
   );
 }

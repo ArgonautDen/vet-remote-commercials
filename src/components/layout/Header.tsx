@@ -57,7 +57,7 @@ export function Header() {
             Контакты
           </Button>
           <HashLink hash="#pricing">
-            <Button variant="primary" size="md">
+            <Button variant="primary" size="md" shimmer>
               Попробовать бесплатно
             </Button>
           </HashLink>
@@ -104,7 +104,7 @@ export function Header() {
               onNavigate={() => setIsMobileOpen(false)}
               className="mt-2"
             >
-              <Button variant="primary" size="lg" className="w-full">
+              <Button variant="primary" size="lg" shimmer className="w-full">
                 Попробовать бесплатно
               </Button>
             </HashLink>

@@ -1,11 +1,14 @@
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { CornerMarks } from "@/components/ui/CornerMarks";
 import { problems } from "@/data/problems";
 
 export function ProblemSection() {
   return (
-    <section className="py-20 sm:py-24">
+    <section className="relative overflow-hidden py-20 sm:py-24">
+      <div
+        aria-hidden="true"
+        className="hero-blob absolute -right-24 top-10 -z-10 size-80 rounded-full bg-pumpkin-300/20 blur-3xl animate-float"
+      />
       <Container>
         <Reveal className="mx-auto mb-14 max-w-2xl text-center">
           <h2 className="text-balance text-3xl font-bold leading-tight text-ink-900 sm:text-4xl">
@@ -16,8 +19,7 @@ export function ProblemSection() {
         <div className="grid gap-6 sm:grid-cols-3">
           {problems.map((problem, index) => (
             <Reveal key={problem.title} delay={index * 100}>
-              <div className="relative flex h-full flex-col gap-4 rounded-2xl border border-ink-200/70 bg-surface p-6 shadow-soft">
-                <CornerMarks />
+              <div className="glass-shine-card flex h-full flex-col gap-4 rounded-2xl p-6 shadow-soft">
                 <span className="flex size-12 items-center justify-center rounded-xl bg-rose-50 text-rose-500">
                   <problem.icon className="size-6" aria-hidden="true" />
                 </span>

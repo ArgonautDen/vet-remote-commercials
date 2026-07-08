@@ -2,7 +2,6 @@ import { Clock, Mail, Send, Users } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { CornerMarks } from "@/components/ui/CornerMarks";
 import { ContactForm } from "@/components/ContactForm";
 
 const contactDetails = [
@@ -40,14 +39,12 @@ export function Contacts() {
         </Reveal>
 
         <div className="grid gap-8 lg:grid-cols-[1fr_0.8fr]">
-          <Reveal direction="left" className="relative rounded-3xl border border-ink-200 bg-surface p-6 shadow-soft sm:p-8">
-            <CornerMarks />
+          <Reveal direction="left" className="rounded-3xl border border-ink-200 bg-surface p-6 shadow-soft sm:p-8">
             <ContactForm />
           </Reveal>
 
           <Reveal direction="right" delay={120} className="flex flex-col gap-6">
-            <div className="relative flex flex-col gap-5 rounded-3xl border border-ink-200 bg-surface p-6 shadow-soft sm:p-8">
-              <CornerMarks />
+            <div className="flex flex-col gap-5 rounded-3xl border border-ink-200 bg-surface p-6 shadow-soft sm:p-8">
               {contactDetails.map((detail) => {
                 const content = (
                   <div className="flex items-start gap-3">

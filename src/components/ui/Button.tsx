@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { useMemo, type ButtonHTMLAttributes, type CSSProperties, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/cn";
 
@@ -12,6 +12,8 @@ interface BaseProps {
   children: ReactNode;
   icon?: ReactNode;
   iconPosition?: "left" | "right";
+  /** Adds a slow, elegant light sweep across the button (see .btn-shimmer in index.css). */
+  shimmer?: boolean;
 }
 
 type ButtonAsButton = BaseProps &
@@ -50,7 +52,7 @@ const sizeClasses: Record<Size, string> = {
 };
 
 const base =
-  "inline-flex cursor-pointer items-center justify-center rounded-xl font-display font-semibold transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:cursor-not-allowed disabled:opacity-50";
+  "relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-xl font-display font-semibold transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:cursor-not-allowed disabled:opacity-50";
 
 export function Button(props: ButtonProps) {
   const {
@@ -60,10 +62,17 @@ export function Button(props: ButtonProps) {
     children,
     icon,
     iconPosition = "right",
+    shimmer = false,
     ...rest
   } = props;
 
-  const classes = cn(base, variantClasses[variant], sizeClasses[size], className);
+  const classes = cn(base, variantClasses[variant], sizeClasses[size], shimmer && "btn-shimmer", className);
+  // Randomized per-instance so multiple shimmering buttons on the same page
+  // never sweep in sync — each one drifts on its own clock.
+  const shimmerStyle = useMemo<CSSProperties | undefined>(
+    () => (shimmer ? ({ "--shimmer-delay": `-${(Math.random() * 9).toFixed(2)}s` } as CSSProperties) : undefined),
+    [shimmer],
+  );
   const content = (
     <>
       {icon && iconPosition === "left" && <span className="shrink-0">{icon}</span>}
@@ -75,7 +84,7 @@ export function Button(props: ButtonProps) {
   if ("to" in props && props.to) {
     const { to, onClick } = rest as ButtonAsLink;
     return (
-      <Link to={to} onClick={onClick} className={classes}>
+      <Link to={to} onClick={onClick} className={classes} style={shimmerStyle}>
         {content}
       </Link>
     );
@@ -84,7 +93,14 @@ export function Button(props: ButtonProps) {
   if ("href" in props && props.href) {
     const { href, target, rel, onClick } = rest as ButtonAsAnchor;
     return (
-      <a href={href} target={target} rel={rel} onClick={onClick} className={classes}>
+      <a
+        href={href}
+        target={target}
+        rel={rel}
+        onClick={onClick}
+        className={classes}
+        style={shimmerStyle}
+      >
         {content}
       </a>
     );
@@ -92,7 +108,12 @@ export function Button(props: ButtonProps) {
 
   const buttonRest = rest as ButtonHTMLAttributes<HTMLButtonElement>;
   return (
-    <button type={buttonRest.type ?? "button"} className={classes} {...buttonRest}>
+    <button
+      type={buttonRest.type ?? "button"}
+      className={classes}
+      style={shimmerStyle}
+      {...buttonRest}
+    >
       {content}
     </button>
   );

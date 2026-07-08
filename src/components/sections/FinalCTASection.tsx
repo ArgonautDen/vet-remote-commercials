@@ -14,7 +14,7 @@ export function FinalCTASection() {
 
       <Container className="relative flex flex-col items-center gap-6 text-center">
         <Reveal>
-          <h2 className="text-balance font-display text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
+          <h2 className="no-drop-cap text-balance font-display text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
             Попробуйте VetRemote сегодня —<br className="hidden sm:block" /> бесплатно, без
             обязательств
           </h2>
@@ -29,10 +29,11 @@ export function FinalCTASection() {
             to="/contacts"
             variant="secondary"
             size="lg"
+            shimmer
             icon={<ArrowRight className="size-5" />}
             className="mt-2"
           >
-            Создать аккаунт
+            Попробовать бесплатно
           </Button>
         </Reveal>
       </Container>
