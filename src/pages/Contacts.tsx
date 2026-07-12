@@ -8,8 +8,8 @@ const contactDetails = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@vetremote.app",
-    href: "mailto:hello@vetremote.app",
+    value: "info@vetremote.ru",
+    href: "mailto:info@vetremote.ru",
   },
   {
     icon: Send,
@@ -39,9 +39,11 @@ export function Contacts() {
         </Reveal>
 
         <div className="grid gap-8 lg:grid-cols-[1fr_0.8fr]">
-          <Reveal direction="left" className="rounded-3xl border border-ink-200 bg-surface p-6 shadow-soft sm:p-8">
-            <ContactForm />
-          </Reveal>
+          <div id="contact-form" className="scroll-mt-24">
+            <Reveal direction="left" className="rounded-3xl border border-ink-200 bg-surface p-6 shadow-soft sm:p-8">
+              <ContactForm />
+            </Reveal>
+          </div>
 
           <Reveal direction="right" delay={120} className="flex flex-col gap-6">
             <div className="flex flex-col gap-5 rounded-3xl border border-ink-200 bg-surface p-6 shadow-soft sm:p-8">
@@ -90,7 +92,7 @@ export function Contacts() {
                 </p>
               </div>
               <Button
-                href="mailto:hello@vetremote.app?subject=Демо для клиники"
+                href="mailto:info@vetremote.ru?subject=Демо для клиники"
                 variant="secondary"
                 size="md"
                 className="w-fit"

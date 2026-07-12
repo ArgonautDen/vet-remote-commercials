@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { HashLink } from "@/components/ui/HashLink";
-import { BrowserFrame } from "@/components/mockups/BrowserFrame";
 import { PhoneFrame } from "@/components/mockups/PhoneFrame";
-import { DashboardMockup } from "@/components/mockups/DashboardMockup";
-import { CalendarDayMockup } from "@/components/mockups/CalendarDayMockup";
 import { VideoModal } from "@/components/VideoModal";
+import { useAppReady } from "@/context/AppReadyContext";
+import dashboardScreenshot from "@/assets/screenshots/dashboard.jpg";
+import dashboardMobileScreenshot from "@/assets/screenshots/dashboard-mobile.jpg";
 
 const trustPoints = [
   { icon: ShieldCheck, label: "Без установки" },
@@ -18,6 +18,7 @@ const trustPoints = [
 
 export function Hero() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const isAppReady = useAppReady();
 
   return (
     <section
@@ -48,7 +49,7 @@ export function Hero() {
       />
 
       <Container className="grid items-center gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-10">
-        <Reveal direction="left" className="flex flex-col items-start gap-6">
+        <Reveal direction="left" active={isAppReady} className="flex flex-col items-start gap-6">
           <span className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white/80 px-4 py-1.5 text-sm font-semibold text-indigo-700 shadow-soft backdrop-blur">
             Первая в России CRM для ветврачей нового поколения
           </span>
@@ -96,7 +97,7 @@ export function Hero() {
           </ul>
         </Reveal>
 
-        <Reveal direction="right" delay={150} className="relative">
+        <Reveal direction="right" delay={150} active={isAppReady} className="relative">
           <div className="relative mx-auto max-w-xl lg:max-w-none">
             <button
               type="button"
@@ -104,9 +105,11 @@ export function Hero() {
               className="group relative block w-full cursor-pointer text-left"
               aria-label="Смотреть демо VetRemote"
             >
-              <BrowserFrame className="transition-transform duration-500 group-hover:-translate-y-1">
-                <DashboardMockup />
-              </BrowserFrame>
+              <img
+                src={dashboardScreenshot}
+                alt="Интерфейс VetRemote"
+                className="block h-auto w-full rounded-2xl shadow-lift transition-transform duration-500 group-hover:-translate-y-1"
+              />
               <span className="absolute inset-0 flex items-center justify-center bg-void/0 transition-colors duration-300 group-hover:bg-void/10">
                 <span className="flex size-16 scale-90 items-center justify-center rounded-full bg-white/95 text-indigo-600 opacity-0 shadow-lift transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
                   <PlayCircle className="size-8" aria-hidden="true" />
@@ -117,10 +120,15 @@ export function Hero() {
             <Reveal
               direction="up"
               delay={450}
-              className="absolute -right-6 bottom-[50px] hidden sm:block lg:-right-10 lg:bottom-[34px]"
+              active={isAppReady}
+              className="absolute -right-6 bottom-[20px] hidden sm:block lg:-right-10 lg:bottom-[4px]"
             >
               <PhoneFrame className="shadow-lift">
-                <CalendarDayMockup />
+                <img
+                  src={dashboardMobileScreenshot}
+                  alt="Мобильная версия VetRemote"
+                  className="block size-full object-cover"
+                />
               </PhoneFrame>
             </Reveal>
           </div>

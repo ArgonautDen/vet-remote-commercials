@@ -193,6 +193,18 @@
   transform: rotateY(180deg);
 }
 
+/* Hides the scrollbar chrome on an internally-scrollable element while
+   keeping it functionally scrollable (used on the FAQ card's answer text,
+   which may overflow the fixed card height). */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Frosted "soft-touch" glass treatment for explanation cards (problems,
    pricing, feature text): heavy blur + a matte, evenly-misted translucent
    fill (like a light spray coating, not clear glossy glass), soft all-round
@@ -222,6 +234,31 @@
   opacity: 0.4;
   mix-blend-mode: overlay;
   pointer-events: none;
+}
+
+/* Splash/loading screen: the logo "charges up" like gaining mana — a soft
+   white glow that builds gradually, plus a barely-there scale swell. Pure
+   CSS keyframe (fixed, predictable timeline) rather than JS-driven, so it
+   stays perfectly in sync with the fixed 3s splash duration in
+   LoadingScreen.tsx. */
+@keyframes logo-charge {
+  0% {
+    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+    transform: scale(0.94);
+  }
+  55% {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.4));
+    transform: scale(0.98);
+  }
+  100% {
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.85)) drop-shadow(0 0 70px rgba(255, 255, 255, 0.55))
+      drop-shadow(0 0 12px rgba(255, 255, 255, 0.95));
+    transform: scale(1.03);
+  }
+}
+
+.loading-logo-charge {
+  animation: logo-charge 2.3s cubic-bezier(0.34, 0, 0.2, 1) forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {

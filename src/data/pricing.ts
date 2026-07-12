@@ -25,7 +25,7 @@ export const pricingPlans: PricingPlan[] = [
   },
   {
     name: "Полный доступ",
-    price: "2 490 ₽",
+    price: "2 500 ₽",
     period: "в месяц",
     description: "Для практикующего врача или частного кабинета — всё включено.",
     features: [

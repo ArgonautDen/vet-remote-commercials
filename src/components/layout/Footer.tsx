@@ -1,18 +1,17 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Send, Mail } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
 import { HashLink } from "@/components/ui/HashLink";
 import { Container } from "@/components/ui/Container";
+import { LegalModal } from "@/components/LegalModal";
 import { navItems } from "@/data/navigation";
-
-const legalLinks = [
-  { label: "Условия использования", href: "#" },
-  { label: "Политика конфиденциальности", href: "#" },
-  { label: "Договор оферты", href: "#" },
-];
+import { legalDocs, type LegalDoc } from "@/data/legalDocs";
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const [openDocId, setOpenDocId] = useState<LegalDoc["id"] | null>(null);
+  const openDoc = legalDocs.find((doc) => doc.id === openDocId) ?? null;
 
   return (
     <footer className="border-t border-ink-200 bg-surface">
@@ -47,11 +46,11 @@ export function Footer() {
         <div className="flex flex-col gap-3">
           <span className="font-display text-sm font-semibold text-ink-900">Связаться</span>
           <a
-            href="mailto:hello@vetremote.app"
+            href="mailto:info@vetremote.ru"
             className="flex items-center gap-2 text-sm text-ink-500 transition-colors hover:text-indigo-700"
           >
             <Mail className="size-4" aria-hidden="true" />
-            hello@vetremote.app
+            info@vetremote.ru
           </a>
           <a
             href="https://t.me/vetremote"
@@ -66,14 +65,15 @@ export function Footer() {
 
         <div className="flex flex-col gap-3">
           <span className="font-display text-sm font-semibold text-ink-900">Документы</span>
-          {legalLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-sm text-ink-500 transition-colors hover:text-indigo-700"
+          {legalDocs.map((doc) => (
+            <button
+              key={doc.id}
+              type="button"
+              onClick={() => setOpenDocId(doc.id)}
+              className="cursor-pointer text-left text-sm text-ink-500 transition-colors hover:text-indigo-700"
             >
-              {link.label}
-            </a>
+              {doc.title}
+            </button>
           ))}
         </div>
       </Container>
@@ -84,6 +84,8 @@ export function Footer() {
           <span>Сделано в России, для российских ветклиник</span>
         </Container>
       </div>
+
+      <LegalModal doc={openDoc} onClose={() => setOpenDocId(null)} />
     </footer>
   );
 }

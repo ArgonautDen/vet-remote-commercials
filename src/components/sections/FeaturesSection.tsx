@@ -10,6 +10,7 @@ import { CalendarDayMockup } from "@/components/mockups/CalendarDayMockup";
 import { BookingMockup } from "@/components/mockups/BookingMockup";
 import { SurveyMockup } from "@/components/mockups/SurveyMockup";
 import { TemplatesMockup } from "@/components/mockups/TemplatesMockup";
+import happyDoctorImage from "@/assets/screenshots/happy-doctor.jpg";
 
 export function FeaturesSection() {
   return (
@@ -20,7 +21,8 @@ export function FeaturesSection() {
         style={{ animationDelay: "2.2s" }}
       />
       <Container>
-        <Reveal>
+        {/* Mobile/tablet: plain centered heading, no room for the portrait. */}
+        <Reveal className="lg:hidden">
           <SectionHeading
             eyebrow="Возможности"
             title="Всё, что нужно врачу в одном рабочем пространстве"
@@ -28,6 +30,31 @@ export function FeaturesSection() {
             className="mb-6"
           />
         </Reveal>
+
+        {/* Desktop: doctor portrait as a fading background, heading pushed
+            right so doctor + text compose as one centered unit. */}
+        <div className="relative mb-6 hidden lg:block">
+          <div
+            aria-hidden="true"
+            className="absolute inset-y-0 left-0 w-[44%]"
+            style={{
+              backgroundImage: `url(${happyDoctorImage})`,
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "left center",
+              backgroundSize: "contain",
+              maskImage: "linear-gradient(to right, black 65%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to right, black 65%, transparent 100%)",
+            }}
+          />
+          <Reveal className="relative flex min-h-[320px] flex-col justify-center py-10 pl-[38%]">
+            <SectionHeading
+              eyebrow="Возможности"
+              title="Всё, что нужно врачу в одном рабочем пространстве"
+              description="Никаких лишних модулей и настроек — только то, чем вы пользуетесь каждый день."
+              align="left"
+            />
+          </Reveal>
+        </div>
       </Container>
 
       <Container className="divide-y divide-ink-100">
@@ -52,9 +79,7 @@ export function FeaturesSection() {
           className="!pt-[150px]"
           visual={
             <div className="relative lg:min-h-[410px]">
-              <BrowserFrame>
-                <CalendarMockup />
-              </BrowserFrame>
+              <CalendarMockup />
               <Reveal
                 direction="up"
                 delay={300}
@@ -88,11 +113,7 @@ export function FeaturesSection() {
           title="Узнайте всё о пациенте до приёма"
           description="Создайте анкету с нужными вопросами, отправьте одноразовую ссылку клиенту. Ответы сохранятся в системе — приём начнётся уже подготовленным."
           reverse
-          visual={
-            <BrowserFrame>
-              <SurveyMockup />
-            </BrowserFrame>
-          }
+          visual={<SurveyMockup />}
         />
 
         <FeatureRow

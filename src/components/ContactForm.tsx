@@ -1,14 +1,19 @@
 import { useState, type FormEvent } from "react";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { LegalModal } from "@/components/LegalModal";
+import { legalDocs } from "@/data/legalDocs";
 
 type Status = "idle" | "submitting" | "success";
 
 const fieldClasses =
   "w-full rounded-xl border border-ink-200 bg-surface px-4 py-3 text-[15px] text-ink-900 placeholder:text-ink-400 transition-colors focus:border-indigo-500 focus:outline-none";
 
+const privacyDoc = legalDocs.find((doc) => doc.id === "privacy") ?? null;
+
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -74,6 +79,23 @@ export function ContactForm() {
         />
       </div>
 
+      <label className="flex items-start gap-2.5 text-sm leading-relaxed text-ink-600">
+        <input
+          type="checkbox"
+          name="consent"
+          required
+          className="mt-0.5 size-4 shrink-0 cursor-pointer accent-indigo-600"
+        />
+        Согласен(а) на{" "}
+        <button
+          type="button"
+          onClick={() => setIsPrivacyOpen(true)}
+          className="cursor-pointer text-indigo-600 underline decoration-indigo-200 underline-offset-2 transition-colors hover:text-indigo-700"
+        >
+          обработку персональных данных
+        </button>
+      </label>
+
       <Button
         type="submit"
         variant="primary"
@@ -90,6 +112,8 @@ export function ContactForm() {
       >
         {status === "submitting" ? "Отправляем..." : "Отправить"}
       </Button>
+
+      <LegalModal doc={isPrivacyOpen ? privacyDoc : null} onClose={() => setIsPrivacyOpen(false)} />
     </form>
   );
 }

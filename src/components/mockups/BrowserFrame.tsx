@@ -8,7 +8,7 @@ interface BrowserFrameProps {
   className?: string;
 }
 
-export function BrowserFrame({ children, url = "app.vetremote.ru", className }: BrowserFrameProps) {
+export function BrowserFrame({ children, url = "vet-remote.ru", className }: BrowserFrameProps) {
   return (
     <div
       className={cn(

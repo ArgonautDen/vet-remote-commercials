@@ -56,11 +56,9 @@ export function Header() {
           <Button to="/contacts" variant="ghost" size="md">
             Контакты
           </Button>
-          <HashLink hash="#pricing">
-            <Button variant="primary" size="md" shimmer>
-              Попробовать бесплатно
-            </Button>
-          </HashLink>
+          <Button to="/contacts#contact-form" variant="primary" size="md" shimmer>
+            Попробовать бесплатно
+          </Button>
         </div>
 
         <button
@@ -99,15 +97,16 @@ export function Header() {
             >
               Контакты
             </Link>
-            <HashLink
-              hash="#pricing"
-              onNavigate={() => setIsMobileOpen(false)}
-              className="mt-2"
+            <Button
+              to="/contacts#contact-form"
+              onClick={() => setIsMobileOpen(false)}
+              variant="primary"
+              size="lg"
+              shimmer
+              className="mt-2 w-full"
             >
-              <Button variant="primary" size="lg" shimmer className="w-full">
-                Попробовать бесплатно
-              </Button>
-            </HashLink>
+              Попробовать бесплатно
+            </Button>
           </Container>
         </div>
       </div>

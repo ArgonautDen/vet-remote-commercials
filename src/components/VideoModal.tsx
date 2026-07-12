@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { PlayCircle, X } from "lucide-react";
-import { DashboardMockup } from "@/components/mockups/DashboardMockup";
-import { BrowserFrame } from "@/components/mockups/BrowserFrame";
+import dashboardScreenshot from "@/assets/screenshots/dashboard.jpg";
 
 /**
  * Set to a real YouTube video ID to embed the actual product demo.
@@ -67,9 +66,11 @@ export function VideoModal({ isOpen, onClose }: VideoModalProps) {
           ) : (
             <div className="relative flex size-full items-center justify-center bg-void p-6">
               <div className="pointer-events-none absolute inset-0 opacity-30">
-                <BrowserFrame className="scale-110">
-                  <DashboardMockup />
-                </BrowserFrame>
+                <img
+                  src={dashboardScreenshot}
+                  alt=""
+                  className="size-full scale-110 object-cover"
+                />
               </div>
               <div className="relative flex flex-col items-center gap-3 text-center">
                 <PlayCircle className="size-16 text-white/90" aria-hidden="true" />

@@ -7,7 +7,7 @@ export function BookingMockup() {
   return (
     <div className="flex h-full flex-col bg-white">
       <div className="border-b border-ink-100 px-4 py-3.5 text-center">
-        <p className="text-[11px] text-ink-400">vetremote.app/dr/anokhina</p>
+        <p className="text-[11px] text-ink-400">vet-remote.ru/dr/anokhina</p>
         <p className="font-display text-sm font-bold text-ink-900">Др. Анохина Е.В.</p>
       </div>
 

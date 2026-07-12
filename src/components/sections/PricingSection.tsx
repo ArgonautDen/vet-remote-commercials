@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 
 export function PricingSection() {
   return (
-    <section id="pricing" className="relative overflow-hidden py-20 sm:py-24">
+    <section id="pricing" className="relative overflow-hidden bg-indigo-600 py-20 sm:py-24">
       <div
         aria-hidden="true"
         className="hero-blob absolute -left-24 bottom-0 -z-10 size-96 rounded-full bg-pumpkin-300/20 blur-3xl animate-float"
@@ -20,6 +20,7 @@ export function PricingSection() {
             eyebrow="Тарифы"
             title="Простая и честная цена"
             description="Начните бесплатно, переходите на полный доступ, когда будете готовы."
+            tone="dark"
             className="mb-14"
           />
         </Reveal>
@@ -74,9 +75,9 @@ export function PricingSection() {
 
                 <Button
                   to="/contacts"
-                  variant={plan.highlighted ? "outline" : "primary"}
+                  variant={plan.highlighted ? "primary" : "secondary"}
                   size="lg"
-                  shimmer={!plan.highlighted}
+                  shimmer={plan.highlighted}
                   className="w-full"
                 >
                   {plan.cta}
@@ -86,7 +87,7 @@ export function PricingSection() {
           ))}
         </div>
 
-        <p className="mt-10 text-center text-sm text-ink-400">
+        <p className="mt-10 text-center text-sm text-white/70">
           Нет скрытых платежей. Нет «модулей за доп. плату». Одна цена — всё включено.
         </p>
       </Container>
