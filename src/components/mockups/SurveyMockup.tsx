@@ -1,8 +1,10 @@
 import surveyScreenshot from "@/assets/screenshots/survey.jpg";
 
 /**
- * The screenshot already includes its own browser-window chrome, so this
- * renders as a flat image rather than being wrapped in <BrowserFrame>.
+ * The screenshot already includes its own browser-window chrome (baked in
+ * by the capture tool), so this renders as a flat image rather than being
+ * wrapped in <BrowserFrame> — that would double up the window chrome (same
+ * treatment as CalendarMockup, which this now matches).
  */
 export function SurveyMockup() {
   return (
