@@ -160,7 +160,7 @@ export function Hero() {
               active={isAppReady}
               className="absolute -right-6 bottom-[55px] hidden sm:block lg:-right-10 lg:bottom-[39px]"
             >
-              <PhoneFrame className="w-[175px] shadow-lift">
+              <PhoneFrame className="!w-[175px] shadow-lift">
                 <img
                   src={dashboardMobileScreenshot}
                   alt="Мобильная версия VetRemote"

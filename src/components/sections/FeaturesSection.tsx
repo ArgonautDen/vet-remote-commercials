@@ -85,7 +85,7 @@ export function FeaturesSection() {
                 delay={300}
                 className="absolute -bottom-[2px] left-6 z-10 hidden lg:block"
               >
-                <PhoneFrame className="w-[180px] shadow-lift">
+                <PhoneFrame className="!w-[180px] shadow-lift">
                   <CalendarDayMockup />
                 </PhoneFrame>
               </Reveal>

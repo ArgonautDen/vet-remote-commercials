@@ -14,6 +14,7 @@ const privacyDoc = legalDocs.find((doc) => doc.id === "privacy") ?? null;
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [hasConsent, setHasConsent] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -84,6 +85,8 @@ export function ContactForm() {
           type="checkbox"
           name="consent"
           required
+          checked={hasConsent}
+          onChange={(event) => setHasConsent(event.target.checked)}
           className="mt-0.5 size-4 shrink-0 cursor-pointer accent-indigo-600"
         />
         Согласен(а) на{" "}
@@ -100,7 +103,7 @@ export function ContactForm() {
         type="submit"
         variant="primary"
         size="lg"
-        disabled={status === "submitting"}
+        disabled={status === "submitting" || !hasConsent}
         className="mt-2"
         icon={
           status === "submitting" ? (
