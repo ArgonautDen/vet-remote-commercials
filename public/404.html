@@ -12,10 +12,10 @@
       // (https://github.com/rafgraph/spa-github-pages).
       //
       // pathSegmentsToKeep = number of leading path segments that are the
-      // deployment's base path, not part of the app route. Currently 1
-      // (the "/vet-remote-commercials" project-pages subpath) — set this
-      // back to 0 once serving from the vetremote.ru domain root.
-      var pathSegmentsToKeep = 1;
+      // deployment's base path, not part of the app route. 0 because we
+      // serve from the vetremote.ru domain root — set back to 1 if ever
+      // reverting to the bare "/vet-remote-commercials" github.io subpath.
+      var pathSegmentsToKeep = 0;
       var l = window.location;
       l.replace(
         l.protocol + "//" + l.hostname + (l.port ? ":" + l.port : "") +
