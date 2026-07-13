@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CalendarCheck, PlayCircle, ShieldCheck, Smartphone, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -7,8 +7,14 @@ import { HashLink } from "@/components/ui/HashLink";
 import { PhoneFrame } from "@/components/mockups/PhoneFrame";
 import { VideoModal } from "@/components/VideoModal";
 import { useAppReady } from "@/context/AppReadyContext";
+import { cn } from "@/lib/cn";
 import dashboardScreenshot from "@/assets/screenshots/dashboard.jpg";
 import dashboardMobileScreenshot from "@/assets/screenshots/dashboard-mobile.jpg";
+import demoVideo from "@/assets/video/demo.mp4";
+
+/** Wait for the hero's own slide-in reveal to settle before the preview
+ * starts playing, so the two entrances don't compete. */
+const INTRO_PLAY_DELAY_MS = 900;
 
 const trustPoints = [
   { icon: ShieldCheck, label: "Без установки" },
@@ -18,7 +24,23 @@ const trustPoints = [
 
 export function Hero() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [isIntroPlaying, setIsIntroPlaying] = useState(false);
+  const introVideoRef = useRef<HTMLVideoElement>(null);
   const isAppReady = useAppReady();
+
+  useEffect(() => {
+    if (!isAppReady) return;
+    const timer = window.setTimeout(() => {
+      introVideoRef.current?.play().catch(() => {});
+      setIsIntroPlaying(true);
+    }, INTRO_PLAY_DELAY_MS);
+    return () => window.clearTimeout(timer);
+  }, [isAppReady]);
+
+  function openVideoModal() {
+    introVideoRef.current?.pause();
+    setIsVideoOpen(true);
+  }
 
   return (
     <section
@@ -81,7 +103,7 @@ export function Hero() {
               size="lg"
               icon={<PlayCircle className="size-5" />}
               iconPosition="left"
-              onClick={() => setIsVideoOpen(true)}
+              onClick={openVideoModal}
             >
               Смотреть демо
             </Button>
@@ -101,14 +123,29 @@ export function Hero() {
           <div className="relative mx-auto max-w-xl lg:max-w-none">
             <button
               type="button"
-              onClick={() => setIsVideoOpen(true)}
+              onClick={openVideoModal}
               className="group relative block w-full cursor-pointer text-left"
               aria-label="Смотреть демо VetRemote"
             >
               <img
                 src={dashboardScreenshot}
                 alt="Интерфейс VetRemote"
-                className="block h-auto w-full rounded-2xl shadow-lift transition-transform duration-500 group-hover:-translate-y-1"
+                className={cn(
+                  "block h-auto w-full rounded-2xl shadow-lift transition-all duration-500 group-hover:-translate-y-1",
+                  isIntroPlaying && "opacity-0",
+                )}
+              />
+              <video
+                ref={introVideoRef}
+                src={demoVideo}
+                muted
+                playsInline
+                onEnded={() => setIsIntroPlaying(false)}
+                aria-hidden="true"
+                className={cn(
+                  "absolute inset-0 block size-full rounded-2xl object-cover shadow-lift transition-opacity duration-700 group-hover:-translate-y-1",
+                  isIntroPlaying ? "opacity-100" : "pointer-events-none opacity-0",
+                )}
               />
               <span className="absolute inset-0 flex items-center justify-center bg-void/0 transition-colors duration-300 group-hover:bg-void/10">
                 <span className="flex size-16 scale-90 items-center justify-center rounded-full bg-white/95 text-indigo-600 opacity-0 shadow-lift transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
@@ -121,9 +158,9 @@ export function Hero() {
               direction="up"
               delay={450}
               active={isAppReady}
-              className="absolute -right-6 bottom-[20px] hidden sm:block lg:-right-10 lg:bottom-[4px]"
+              className="absolute -right-6 bottom-[55px] hidden sm:block lg:-right-10 lg:bottom-[39px]"
             >
-              <PhoneFrame className="shadow-lift">
+              <PhoneFrame className="w-[175px] shadow-lift">
                 <img
                   src={dashboardMobileScreenshot}
                   alt="Мобильная версия VetRemote"

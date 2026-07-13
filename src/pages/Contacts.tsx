@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { ContactForm } from "@/components/ContactForm";
+import demoVideo from "@/assets/video/demo.mp4";
 
 const contactDetails = [
   {
@@ -26,13 +27,25 @@ const contactDetails = [
 
 export function Contacts() {
   return (
-    <section className="py-16 sm:py-24">
+    <section className="relative isolate overflow-hidden py-16 sm:py-24">
+      <video
+        aria-hidden="true"
+        src={demoVideo}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 -z-20 size-full object-cover"
+        style={{ filter: "brightness(0.45) saturate(1.15)" }}
+      />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-indigo-900/55" />
+
       <Container className="max-w-5xl">
         <Reveal className="mx-auto mb-14 max-w-xl text-center">
-          <h1 className="font-display text-3xl font-extrabold text-ink-900 sm:text-4xl">
+          <h1 className="font-display text-3xl font-extrabold text-white sm:text-4xl">
             Свяжитесь с нами
           </h1>
-          <p className="mt-4 text-balance text-lg leading-relaxed text-ink-500">
+          <p className="mt-4 text-balance text-lg leading-relaxed text-white/80">
             Есть вопросы? Хотите демо или помощь с переходом? Напишите — ответим в течение
             нескольких часов.
           </p>

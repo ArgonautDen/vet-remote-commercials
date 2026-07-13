@@ -1,14 +1,8 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { PlayCircle, X } from "lucide-react";
+import { X } from "lucide-react";
 import dashboardScreenshot from "@/assets/screenshots/dashboard.jpg";
-
-/**
- * Set to a real YouTube video ID to embed the actual product demo.
- * Left empty, the modal shows a tasteful "coming soon" placeholder instead
- * of a broken embed.
- */
-const DEMO_VIDEO_ID = "";
+import demoVideo from "@/assets/video/demo.mp4";
 
 interface VideoModalProps {
   isOpen: boolean;
@@ -54,36 +48,15 @@ export function VideoModal({ isOpen, onClose }: VideoModalProps) {
           <X className="size-5" aria-hidden="true" />
         </button>
 
-        <div className="aspect-video w-full">
-          {DEMO_VIDEO_ID ? (
-            <iframe
-              className="size-full"
-              src={`https://www.youtube.com/embed/${DEMO_VIDEO_ID}?autoplay=1`}
-              title="Демо VetRemote"
-              allow="accelerate-compute; autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-            />
-          ) : (
-            <div className="relative flex size-full items-center justify-center bg-void p-6">
-              <div className="pointer-events-none absolute inset-0 opacity-30">
-                <img
-                  src={dashboardScreenshot}
-                  alt=""
-                  className="size-full scale-110 object-cover"
-                />
-              </div>
-              <div className="relative flex flex-col items-center gap-3 text-center">
-                <PlayCircle className="size-16 text-white/90" aria-hidden="true" />
-                <p className="font-display text-lg font-bold text-white">
-                  Демо-видео скоро появится здесь
-                </p>
-                <p className="max-w-sm text-sm text-white/70">
-                  А пока — попробуйте VetRemote бесплатно и посмотрите живой интерфейс своими
-                  глазами.
-                </p>
-              </div>
-            </div>
-          )}
+        <div className="aspect-video w-full bg-void">
+          <video
+            className="size-full"
+            src={demoVideo}
+            poster={dashboardScreenshot}
+            controls
+            autoPlay
+            playsInline
+          />
         </div>
       </div>
     </div>,
