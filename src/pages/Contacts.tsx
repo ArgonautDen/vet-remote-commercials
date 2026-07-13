@@ -98,14 +98,14 @@ export function Contacts() {
                 <Users className="size-5" aria-hidden="true" />
               </span>
               <div>
-                <p className="font-display text-lg font-bold">Для клиник и команд</p>
+                <p className="font-display text-lg font-bold">Для практикующих врачей</p>
                 <p className="mt-1.5 text-sm leading-relaxed text-white/80">
-                  Работаете с несколькими врачами? Получите персональное демо и поможем настроить
-                  VetRemote под процессы вашей клиники.
+                  Ведёте приём самостоятельно? Получите персональное демо и поможем настроить
+                  VetRemote под ваш рабочий процесс.
                 </p>
               </div>
               <Button
-                href="mailto:info@vetremote.ru?subject=Демо для клиники"
+                href="mailto:info@vetremote.ru?subject=Демо для врача"
                 variant="secondary"
                 size="md"
                 className="w-fit"

@@ -81,7 +81,7 @@ export function Footer() {
       <div className="border-t border-ink-100">
         <Container className="flex flex-col items-center gap-2 py-6 text-sm text-ink-400 sm:flex-row sm:justify-between">
           <span>© {year} VetRemote. Все права защищены.</span>
-          <span>Сделано в России, для российских ветклиник</span>
+          <span>Сделано в России, для ветеринарных врачей</span>
         </Container>
       </div>
 
