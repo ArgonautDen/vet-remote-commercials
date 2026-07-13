@@ -73,10 +73,6 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Kept off the Layout wrapper on purpose: overflow-x on an ancestor
-       div implicitly makes its overflow-y "auto" too, which turns it into
-       its own scroll container and breaks the sticky <Header> inside it. */
-    overflow-x: hidden;
   }
 
   body {
