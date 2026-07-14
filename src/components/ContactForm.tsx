@@ -13,7 +13,7 @@ const privacyDoc = legalDocs.find((doc) => doc.id === "privacy") ?? null;
 
 // Web3Forms access key is meant to be used client-side — it's a public
 // submission-routing token, not a secret (see web3forms.com/docs).
-const WEB3FORMS_ACCESS_KEY = "a52aa1fa-5b1a-4d68-b880-7030513cea20";
+const WEB3FORMS_ACCESS_KEY = "0c43d273-e491-4dd4-9a9a-f27c4122163c";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
