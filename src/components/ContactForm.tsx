@@ -97,6 +97,33 @@ export function ContactForm() {
         />
       </div>
 
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="messenger" className="text-sm font-medium text-ink-700">
+            Мессенджер <span className="font-normal text-ink-400">(необязательно)</span>
+          </label>
+          <select id="messenger" name="messenger" defaultValue="" className={fieldClasses}>
+            <option value="">Не выбран</option>
+            <option value="MAX">MAX</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Telegram">Telegram</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="messenger_contact" className="text-sm font-medium text-ink-700">
+            Логин или номер <span className="font-normal text-ink-400">(необязательно)</span>
+          </label>
+          <input
+            id="messenger_contact"
+            name="messenger_contact"
+            type="text"
+            placeholder="@username или +7..."
+            className={fieldClasses}
+          />
+        </div>
+      </div>
+
       <div className="flex flex-col gap-1.5">
         <label htmlFor="message" className="text-sm font-medium text-ink-700">
           Сообщение
