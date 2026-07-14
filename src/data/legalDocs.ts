@@ -12,17 +12,16 @@ export interface LegalDoc {
 }
 
 /**
- * Placeholder legal content for Александров Алексей Сергеевич, self-employed
- * (плательщик налога на профессиональный доход, НПД) — no ОГРНИП since this
- * isn't an ИП. Framed throughout as "оказание услуг по предоставлению
- * доступа к сервису", deliberately avoiding "лицензия"/license language:
- * under 422-ФЗ ст. 6, income from transferring property rights (which a
- * software license legally is) doesn't qualify as NPD-eligible income
- * (residential rental is the only exception) — a services framing keeps
- * this in NPD-eligible territory. Everywhere marked "[...]" is a real
- * detail (ИНН, адрес) that must be filled in before this goes live — a
- * lawyer/accountant should also review the final wording before publishing,
- * particularly the services-not-license framing.
+ * Legal content for Александров Алексей Сергеевич, self-employed (плательщик
+ * налога на профессиональный доход, НПД) — no ОГРНИП since this isn't an
+ * ИП. Framed throughout as "оказание услуг по предоставлению доступа к
+ * сервису", deliberately avoiding "лицензия"/license language: under
+ * 422-ФЗ ст. 6, income from transferring property rights (which a software
+ * license legally is) doesn't qualify as NPD-eligible income (residential
+ * rental is the only exception) — a services framing keeps this in
+ * NPD-eligible territory. A lawyer/accountant should review the final
+ * wording before relying on it, particularly the services-not-license
+ * framing.
  */
 export const legalDocs: LegalDoc[] = [
   {
@@ -32,7 +31,7 @@ export const legalDocs: LegalDoc[] = [
     blocks: [
       {
         paragraphs: [
-          "Настоящие Условия использования (далее — «Условия») являются договором присоединения (ст. 428 ГК РФ) между Александровым Алексеем Сергеевичем, плательщиком налога на профессиональный доход, ИНН [ИНН] (далее — «Исполнитель»), и любым лицом, использующим сайт vetremote.ru и сервис VetRemote, доступный по адресу vet-remote.ru (далее — «Сервис»).",
+          "Настоящие Условия использования (далее — «Условия») являются договором присоединения (ст. 428 ГК РФ) между Александровым Алексеем Сергеевичем, плательщиком налога на профессиональный доход, ИНН 771596851476 (далее — «Исполнитель»), и любым лицом, использующим сайт vetremote.ru и сервис VetRemote, доступный по адресу vet-remote.ru (далее — «Сервис»).",
           "Начиная использовать Сайт или Сервис, Пользователь подтверждает, что ознакомился с Условиями и принимает их в полном объёме. Если Пользователь не согласен с Условиями, использование Сайта и Сервиса должно быть прекращено.",
         ],
       },
@@ -111,8 +110,8 @@ export const legalDocs: LegalDoc[] = [
         list: [
           "Александров Алексей Сергеевич",
           "Плательщик налога на профессиональный доход (самозанятый)",
-          "ИНН [ИНН]",
-          "Адрес: [адрес места жительства]",
+          "ИНН 771596851476",
+          "Адрес: г. Москва",
           "Email: info@vetremote.ru",
         ],
       },
@@ -125,7 +124,7 @@ export const legalDocs: LegalDoc[] = [
     blocks: [
       {
         paragraphs: [
-          "Настоящая Политика конфиденциальности (далее — «Политика») определяет порядок обработки персональных данных Александровым Алексеем Сергеевичем, плательщиком налога на профессиональный доход, ИНН [ИНН] (далее — «Оператор»), в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».",
+          "Настоящая Политика конфиденциальности (далее — «Политика») определяет порядок обработки персональных данных Александровым Алексеем Сергеевичем, плательщиком налога на профессиональный доход, ИНН 771596851476 (далее — «Оператор»), в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».",
           "Используя сайт vetremote.ru или сервис VetRemote (vet-remote.ru), Пользователь подтверждает согласие с условиями настоящей Политики.",
         ],
       },
@@ -134,8 +133,8 @@ export const legalDocs: LegalDoc[] = [
         list: [
           "Александров Алексей Сергеевич",
           "Плательщик налога на профессиональный доход (самозанятый)",
-          "ИНН [ИНН]",
-          "Адрес: [адрес места жительства]",
+          "ИНН 771596851476",
+          "Адрес: г. Москва",
           "Email по вопросам обработки персональных данных: info@vetremote.ru",
         ],
       },
@@ -224,8 +223,8 @@ export const legalDocs: LegalDoc[] = [
         list: [
           "Александров Алексей Сергеевич",
           "Плательщик налога на профессиональный доход (самозанятый)",
-          "ИНН [ИНН]",
-          "Адрес регистрации: [адрес места жительства]",
+          "ИНН 771596851476",
+          "Адрес регистрации: г. Москва",
           "Email: info@vetremote.ru",
         ],
       },
