@@ -1,25 +1,45 @@
 import { useState, type FormEvent } from "react";
-import { CheckCircle2, Loader2, Send } from "lucide-react";
+import { AlertCircle, CheckCircle2, Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { LegalModal } from "@/components/LegalModal";
 import { legalDocs } from "@/data/legalDocs";
 
-type Status = "idle" | "submitting" | "success";
+type Status = "idle" | "submitting" | "success" | "error";
 
 const fieldClasses =
   "w-full rounded-xl border border-ink-200 bg-surface px-4 py-3 text-[15px] text-ink-900 placeholder:text-ink-400 transition-colors focus:border-indigo-500 focus:outline-none";
 
 const privacyDoc = legalDocs.find((doc) => doc.id === "privacy") ?? null;
 
+// Web3Forms access key is meant to be used client-side — it's a public
+// submission-routing token, not a secret (see web3forms.com/docs).
+const WEB3FORMS_ACCESS_KEY = "a52aa1fa-5b1a-4d68-b880-7030513cea20";
+
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [hasConsent, setHasConsent] = useState(false);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("submitting");
-    window.setTimeout(() => setStatus("success"), 900);
+
+    const formData = new FormData(event.currentTarget);
+    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+    formData.append("subject", "Новая заявка с сайта VetRemote");
+    formData.append("from_name", "VetRemote — форма обратной связи");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      });
+      const result = await response.json();
+      setStatus(result.success ? "success" : "error");
+    } catch {
+      setStatus("error");
+    }
   }
 
   if (status === "success") {
@@ -36,6 +56,17 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      {status === "error" && (
+        <div className="flex items-start gap-2.5 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+          <AlertCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+          Не удалось отправить сообщение. Попробуйте ещё раз или напишите напрямую на{" "}
+          <a href="mailto:info@vetremote.ru" className="font-medium underline underline-offset-2">
+            info@vetremote.ru
+          </a>
+          .
+        </div>
+      )}
+
       <div className="flex flex-col gap-1.5">
         <label htmlFor="name" className="text-sm font-medium text-ink-700">
           Имя
