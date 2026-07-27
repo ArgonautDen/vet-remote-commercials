@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { AlertCircle, CheckCircle2, Loader2, Send } from "lucide-react";
+import { AlertCircle, CheckCircle2, ChevronDown, Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { LegalModal } from "@/components/LegalModal";
 import { legalDocs } from "@/data/legalDocs";
@@ -102,12 +102,23 @@ export function ContactForm() {
           <label htmlFor="messenger" className="text-sm font-medium text-ink-700">
             Мессенджер <span className="font-normal text-ink-400">(необязательно)</span>
           </label>
-          <select id="messenger" name="messenger" defaultValue="" className={fieldClasses}>
-            <option value="">Не выбран</option>
-            <option value="MAX">MAX</option>
-            <option value="WhatsApp">WhatsApp</option>
-            <option value="Telegram">Telegram</option>
-          </select>
+          <div className="relative">
+            <select
+              id="messenger"
+              name="messenger"
+              defaultValue=""
+              className={`${fieldClasses} appearance-none pr-10`}
+            >
+              <option value="">Не выбран</option>
+              <option value="MAX">MAX</option>
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="Telegram">Telegram</option>
+            </select>
+            <ChevronDown
+              className="pointer-events-none absolute right-3.5 top-1/2 size-4 -translate-y-1/2 text-ink-400"
+              aria-hidden="true"
+            />
+          </div>
         </div>
 
         <div className="flex flex-col gap-1.5">
