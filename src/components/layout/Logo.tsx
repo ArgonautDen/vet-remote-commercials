@@ -1,10 +1,11 @@
+import type { MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import logoIconNavy from "@/assets/logo-icon-navy.png";
 import { cn } from "@/lib/cn";
 
 interface LogoProps {
   className?: string;
-  onClick?: () => void;
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
 }
 
 export function Logo({ className, onClick }: LogoProps) {

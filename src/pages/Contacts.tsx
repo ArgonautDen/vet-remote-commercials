@@ -1,4 +1,4 @@
-import { Clock, Mail, Send, Users } from "lucide-react";
+import { Clock, Globe, Mail, Send, Users } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
@@ -111,6 +111,27 @@ export function Contacts() {
                 className="w-fit"
               >
                 Запросить демо
+              </Button>
+            </div>
+
+            <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-ink-900/70 p-6 text-white shadow-soft backdrop-blur-xl sm:p-8">
+              <span className="flex size-11 items-center justify-center rounded-xl bg-white/10">
+                <Globe className="size-5" aria-hidden="true" />
+              </span>
+              <div>
+                <p className="font-display text-lg font-bold">Хотите свой сайт?</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-white/70">
+                  Вы ветврач и хотите личный сайт с возможностью записи к вам на консультацию?
+                  Личный сайт под ключ — 10 000 ₽ + 1 мес подписки на VetRemote.
+                </p>
+              </div>
+              <Button
+                href="mailto:info@vetremote.ru?subject=Демо для врача"
+                variant="outline"
+                size="md"
+                className="w-fit"
+              >
+                Узнать подробнее
               </Button>
             </div>
           </Reveal>

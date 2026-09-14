@@ -10,8 +10,8 @@ import { workflowSteps } from "@/data/workflow";
 import { workflowFeatures } from "@/data/workflowFeatures";
 import happyDoctorImage from "@/assets/screenshots/happy-doctor.jpg";
 
-const TIMELINE_START_DELAY = 350;
-const TIMELINE_STEP_DELAY = 120;
+const TIMELINE_START_DELAY = 150;
+const TIMELINE_STEP_DELAY = 70;
 const FEATURES_START_DELAY = 200;
 const FEATURE_STEP_DELAY = 80;
 

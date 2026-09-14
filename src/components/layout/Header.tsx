@@ -92,7 +92,7 @@ export function Header() {
     >
       <Container className="flex h-[72px] items-center justify-between">
         <div className="flex items-center gap-4">
-          <Logo />
+          <Logo onClick={handleHomeLinkClick} />
           <Link
             to="/"
             onClick={handleHomeLinkClick}
