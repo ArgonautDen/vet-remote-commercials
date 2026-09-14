@@ -7,6 +7,7 @@ import { LoadingScreen } from "@/components/LoadingScreen";
 import { CookieBanner } from "@/components/CookieBanner";
 import { AppReadyContext } from "@/context/AppReadyContext";
 import { Home } from "@/pages/Home";
+import { Features } from "@/pages/Features";
 import { Contacts } from "@/pages/Contacts";
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/features" element={<Features />} />
             <Route path="/contacts" element={<Contacts />} />
           </Routes>
         </Layout>
