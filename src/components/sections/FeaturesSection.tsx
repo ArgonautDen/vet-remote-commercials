@@ -11,6 +11,8 @@ import { BookingMockup } from "@/components/mockups/BookingMockup";
 import { SurveyMockup } from "@/components/mockups/SurveyMockup";
 import { TemplatesMockup } from "@/components/mockups/TemplatesMockup";
 import happyDoctorImage from "@/assets/screenshots/happy-doctor.jpg";
+import chatImage from "@/assets/screenshots/chat.jpg";
+import videoImage from "@/assets/screenshots/video.jpg";
 
 export function FeaturesSection() {
   return (
@@ -125,6 +127,39 @@ export function FeaturesSection() {
             <BrowserFrame>
               <TemplatesMockup />
             </BrowserFrame>
+          }
+        />
+
+        <FeatureRow
+          index="06"
+          eyebrow="Чат"
+          title="Чат с владельцами — без ВПН и приложений"
+          description="Отвечайте прямо в браузере — не нужно ставить приложения или обходить блокировки через VPN. Никаких личных номеров: переписка идёт через карточку пациента. Чат всегда под рукой: с компьютера или телефона, где бы вы ни были."
+          reverse
+          visual={
+            <div className="overflow-hidden rounded-3xl shadow-lift">
+              <img
+                src={chatImage}
+                alt="Врач отвечает владельцу в чате прямо с ноутбука"
+                className="block h-auto w-full"
+              />
+            </div>
+          }
+        />
+
+        <FeatureRow
+          index="07"
+          eyebrow="Видеозвонки"
+          title="Видеоконсультации с доктором"
+          description="Проведите приём по видеосвязи, если владелец не может приехать. Звонок открывается прямо в браузере по ссылке — без установки программ. Видите питомца и владельца в реальном времени, как на очном приёме."
+          visual={
+            <div className="overflow-hidden rounded-3xl shadow-lift">
+              <img
+                src={videoImage}
+                alt="Врач проводит видеоконсультацию с владельцем питомца"
+                className="block h-auto w-full"
+              />
+            </div>
           }
         />
       </Container>

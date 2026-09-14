@@ -26,15 +26,25 @@ export function Footer() {
 
         <div className="flex flex-col gap-3">
           <span className="font-display text-sm font-semibold text-ink-900">Навигация</span>
-          {navItems.map((item) => (
-            <HashLink
-              key={item.hash}
-              hash={item.hash}
-              className="text-sm text-ink-500 transition-colors hover:text-indigo-700"
-            >
-              {item.label}
-            </HashLink>
-          ))}
+          {navItems.map((item) =>
+            item.to ? (
+              <Link
+                key={item.label}
+                to={item.to}
+                className="text-sm text-ink-500 transition-colors hover:text-indigo-700"
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <HashLink
+                key={item.label}
+                hash={item.hash!}
+                className="text-sm text-ink-500 transition-colors hover:text-indigo-700"
+              >
+                {item.label}
+              </HashLink>
+            ),
+          )}
           <Link
             to="/contacts"
             className="text-sm text-ink-500 transition-colors hover:text-indigo-700"

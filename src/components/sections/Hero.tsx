@@ -57,16 +57,16 @@ export function Hero() {
         style={{ animationDelay: "1.5s" }}
       />
 
-      {/* Floating ring outlines, echoing login.css's own decorative
-          circles (border + slow float). */}
+      {/* Floating filled circles, echoing login.css's own decorative
+          circles (solid fill + slow float). */}
       <div
         aria-hidden="true"
-        className="brand-ring absolute -right-16 -top-20 -z-10 size-[340px] rounded-full border-2 border-pumpkin-500/25"
+        className="brand-ring absolute -right-16 -top-20 -z-10 size-[340px] rounded-full bg-cta-gradient opacity-60"
         style={{ animation: "brand-ring-float 20s ease-in-out infinite" }}
       />
       <div
         aria-hidden="true"
-        className="brand-ring absolute -bottom-16 -left-10 -z-10 size-[220px] rounded-full border-2 border-pumpkin-500/20"
+        className="brand-ring absolute -bottom-16 -left-10 -z-10 size-[220px] rounded-full bg-cta-gradient opacity-60"
         style={{ animation: "brand-ring-float 15s ease-in-out infinite reverse" }}
       />
 
